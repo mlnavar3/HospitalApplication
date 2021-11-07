@@ -34,6 +34,24 @@ public class MessageAlert {
         alert.showAndWait();
     }
 
+    public static void sendMessageErrorBox(String errorMessage){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error");
+        alert.setContentText(errorMessage);
+
+        alert.showAndWait();
+    }
+
+    public static void sendMessageSuccessfulBox(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Success");
+        alert.setHeaderText("Success");
+        alert.setContentText("Message has been sent!");
+
+        alert.showAndWait();
+    }
+
     public static void sqlError(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

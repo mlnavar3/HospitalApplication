@@ -1,18 +1,33 @@
 package com.example.hospitalapplication;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.net.URL;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.Date;
 
-public class DoctorCreateMessageController {
+public class DoctorCreateMessageController implements Initializable {
 
     String staffID = "";
     Connection conn = null;
@@ -21,8 +36,113 @@ public class DoctorCreateMessageController {
     private Parent root;
 
     @FXML
+    private ComboBox<Patient> recipientList;
+    @FXML
+    private TextField subjectTxt;
+    @FXML
+    private TextField contentTxt;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
+
+    public void loadRecipientList() throws SQLException {
+        conn = Connect.connect();
+
+        String sql = "";
+        PreparedStatement stmt = null;
+        sql = "SELECT patient_profile_id,first_name,last_name FROM Patient_Profile WHERE doctor_id = ?";
+        stmt = conn.prepareStatement(sql);
+        stmt.setString(1, staffID);
+        ResultSet rs = stmt.executeQuery();
+
+        List<Patient> comboboxData = new ArrayList<Patient>();
+        while(rs.next()) {
+            comboboxData.add(new Patient(rs.getString(1), rs.getString(2), rs.getString(3)));
+        }
+
+        ObservableList<Patient> patients = FXCollections.observableArrayList(comboboxData);
+        recipientList.itemsProperty().setValue(patients);
+
+        recipientList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Patient Name: " + newValue.getName());
+            System.out.println("Patient Id: " + newValue.getId());
+        });
+
+        // TODO: Fix convertComboDisplayList()
+        // ISSUE: Cannot invoke "com.example.hospitalapplication.Doctor.getName()" because "doctor" is null
+        // LINE: 98 and 95, basically in the convertComboDisplayList where doctor.getName() is
+        // Uncomment convertComboDisplayList() below to get the error
+        //convertComboDisplayList();
+
+    }
+
+    private void convertComboDisplayList() {
+        recipientList.setConverter(new StringConverter<Patient>() {
+            @Override
+            public String toString(Patient patient) {
+                return patient.getName();
+            }
+
+            @Override
+            public Patient fromString(final String string) {
+                //return doctorList.getItems().stream().filter(product -> product.getName().equals(string)).findFirst().orElse(null);
+                return null;
+            }
+        });
+    }
+
+    @FXML
     public void setStaffID(String id) throws SQLException {
         staffID = id;
+    }
+
+    public String validateInput() {
+        String errorMessage = "";
+
+        // Validate recipient
+        if (recipientList.getValue() == null) {
+            System.out.println("Recipient cannot be empty");
+            errorMessage += "Recipient cannot be empty\n";
+        }
+
+        // Validate subject
+        if (subjectTxt.getText() == null || subjectTxt.getText().trim().isEmpty()) {
+            System.out.println("Subject cannot be empty");
+            errorMessage += "Subject cannot be empty\n";
+        }
+
+        // If error message is empty, return true. Otherwise, return false
+        return errorMessage;
+    }
+
+    public void onSendClick(ActionEvent event) throws IOException, SQLException {
+        String uniqueID = UUID.randomUUID().toString();
+        String validRegistrationInput = validateInput();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+
+        String sql = "INSERT INTO Messages VALUES(?,?,?,?,?,?)";
+
+        if(validRegistrationInput == null || validRegistrationInput.trim().isEmpty()) {
+            try {
+                conn = Connect.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, uniqueID);
+                pstmt.setString(2, recipientList.getValue().getId());
+                pstmt.setString(3, staffID);
+                pstmt.setString(4, subjectTxt.getText());
+                pstmt.setString(5, contentTxt.getText());
+                pstmt.setString(6, formatter.format(date));
+                pstmt.executeUpdate();
+                MessageAlert.sendMessageSuccessfulBox();
+                redirectToMessages(event, staffID);
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            MessageAlert.sendMessageErrorBox(validRegistrationInput);
+        }
     }
 
     @FXML

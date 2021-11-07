@@ -59,6 +59,7 @@ public class DoctorMessagesController implements Initializable {
 
         DoctorCreateMessageController doctorCreateMessageController = loader.getController();
         doctorCreateMessageController.setStaffID(id);
+        doctorCreateMessageController.loadRecipientList();
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
