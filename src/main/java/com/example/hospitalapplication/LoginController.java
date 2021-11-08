@@ -63,8 +63,6 @@ public class LoginController implements Initializable {
         window.show();
     }
 
-    // TODO: transfer staff id to their respective portal
-    @FXML
     public void redirectToDoctorPortal(ActionEvent event, String id) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("doctor-appointment-view.fxml"));
         root = loader.load();
@@ -80,7 +78,6 @@ public class LoginController implements Initializable {
         window.show();
     }
 
-    @FXML
     public void redirectToNursePortal(ActionEvent event) throws IOException {
         Parent registerViewParent = FXMLLoader.load(getClass().getResource("register-view.fxml"));
         Scene registerViewScene = new Scene(registerViewParent);
@@ -89,7 +86,6 @@ public class LoginController implements Initializable {
         window.show();
     }
 
-    @FXML
     public void redirectToPatientPortal(ActionEvent event) throws IOException {
         Parent registerViewParent = FXMLLoader.load(getClass().getResource("register-view.fxml"));
         Scene registerViewScene = new Scene(registerViewParent);
@@ -101,7 +97,6 @@ public class LoginController implements Initializable {
     }
 
     private void redirectPortal(ActionEvent event, String role, String id) throws IOException, SQLException {
-
         switch (role){
             case "Doctor":
                 System.out.println("Doctor Redirect");

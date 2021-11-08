@@ -16,4 +16,8 @@ public class Patient {
         return id;
     }
 
+    @Override
+    public String toString(){
+        return name;
+    }
 }

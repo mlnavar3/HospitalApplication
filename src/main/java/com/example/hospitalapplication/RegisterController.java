@@ -53,6 +53,7 @@ public class RegisterController implements Initializable {
     @FXML
     private ComboBox<Doctor> doctorList;
 
+    // Connection to database variable
     Connection conn = null;
 
     @Override
@@ -79,33 +80,11 @@ public class RegisterController implements Initializable {
         }
 
         ObservableList<Doctor> doctors = FXCollections.observableArrayList(comboboxData);
-        doctorList.itemsProperty().setValue(doctors);
+        doctorList.setItems(doctors);
 
         doctorList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("Doctor Name: " + newValue.getName());
             System.out.println("Doctor Id: " + newValue.getId());
-        });
-
-        // TODO: Fix convertComboDisplayList()
-        // ISSUE: Cannot invoke "com.example.hospitalapplication.Doctor.getName()" because "doctor" is null
-        // LINE: 98 and 95, basically in the convertComboDisplayList where doctor.getName() is
-        // Uncomment convertComboDisplayList() below to get the error
-        //convertComboDisplayList();
-
-    }
-
-    private void convertComboDisplayList() {
-        doctorList.setConverter(new StringConverter<Doctor>() {
-            @Override
-            public String toString(Doctor doctor) {
-                return doctor.getName();
-            }
-
-            @Override
-            public Doctor fromString(final String string) {
-                //return doctorList.getItems().stream().filter(product -> product.getName().equals(string)).findFirst().orElse(null);
-                return null;
-            }
         });
     }
 

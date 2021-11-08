@@ -69,27 +69,6 @@ public class DoctorCreateMessageController implements Initializable {
             System.out.println("Patient Id: " + newValue.getId());
         });
 
-        // TODO: Fix convertComboDisplayList()
-        // ISSUE: Cannot invoke "com.example.hospitalapplication.Doctor.getName()" because "doctor" is null
-        // LINE: 98 and 95, basically in the convertComboDisplayList where doctor.getName() is
-        // Uncomment convertComboDisplayList() below to get the error
-        //convertComboDisplayList();
-
-    }
-
-    private void convertComboDisplayList() {
-        recipientList.setConverter(new StringConverter<Patient>() {
-            @Override
-            public String toString(Patient patient) {
-                return patient.getName();
-            }
-
-            @Override
-            public Patient fromString(final String string) {
-                //return doctorList.getItems().stream().filter(product -> product.getName().equals(string)).findFirst().orElse(null);
-                return null;
-            }
-        });
     }
 
     @FXML

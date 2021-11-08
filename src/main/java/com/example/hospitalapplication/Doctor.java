@@ -9,6 +9,10 @@ public class Doctor {
         this.id = id;
     }
 
+    public Doctor(String firstName, String lastName){
+        name = firstName + " " + lastName;
+    }
+
     public String getName() {
         return name;
     }
@@ -16,4 +20,8 @@ public class Doctor {
         return id;
     }
 
+    @Override
+    public String toString(){
+        return name;
+    }
 }
