@@ -41,7 +41,7 @@ public class DoctorAppointmentsController implements Initializable {
 
     @FXML
     public void setDate() throws SQLException {
-        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+        String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime());
         date.setText(timeStamp);
     }
 
@@ -55,7 +55,7 @@ public class DoctorAppointmentsController implements Initializable {
         conn = Connect.connect();
         String sql = "";
         PreparedStatement stmt = null;
-        sql = "SELECT firstName,lastName FROM Staff WHERE staff_id = ?";
+        sql = "SELECT first_name,last_name FROM Staff WHERE staff_id = ?";
         stmt = conn.prepareStatement(sql);
         stmt.setString(1, staffID);
         ResultSet rs = stmt.executeQuery();
@@ -72,7 +72,7 @@ public class DoctorAppointmentsController implements Initializable {
 
     public void changeToNextDay() throws ParseException {
         String dt = date.getText();  // Start date
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
         Calendar c = Calendar.getInstance();
         c.setTime(sdf.parse(dt));
         c.add(Calendar.DATE, 1);  // number of days to add
@@ -82,7 +82,7 @@ public class DoctorAppointmentsController implements Initializable {
 
     public void changeToPreviousDay() throws ParseException {
         String dt = date.getText();  // Start date
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
         Calendar c = Calendar.getInstance();
         c.setTime(sdf.parse(dt));
         c.add(Calendar.DATE, -1);  // number of days to add

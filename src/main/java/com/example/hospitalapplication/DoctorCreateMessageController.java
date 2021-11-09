@@ -27,6 +27,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Date;
 
+import static com.example.hospitalapplication.Connect.*;
+
 public class DoctorCreateMessageController implements Initializable {
 
     String staffID = "";
@@ -47,7 +49,7 @@ public class DoctorCreateMessageController implements Initializable {
     }
 
     public void loadRecipientList() throws SQLException {
-        conn = Connect.connect();
+        conn = connect();
 
         String sql = "";
         PreparedStatement stmt = null;
@@ -56,7 +58,7 @@ public class DoctorCreateMessageController implements Initializable {
         stmt.setString(1, staffID);
         ResultSet rs = stmt.executeQuery();
 
-        List<Patient> comboboxData = new ArrayList<Patient>();
+        List<Patient> comboboxData = new ArrayList<>();
         while(rs.next()) {
             comboboxData.add(new Patient(rs.getString(1), rs.getString(2), rs.getString(3)));
         }
@@ -65,13 +67,12 @@ public class DoctorCreateMessageController implements Initializable {
         recipientList.itemsProperty().setValue(patients);
 
         recipientList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Patient Name: " + newValue.getName());
+            System.out.println("Patient Name: " + newValue.getFirstName() + " " + newValue.getLastName());
             System.out.println("Patient Id: " + newValue.getId());
         });
 
     }
 
-    @FXML
     public void setStaffID(String id) throws SQLException {
         staffID = id;
     }
@@ -105,7 +106,7 @@ public class DoctorCreateMessageController implements Initializable {
 
         if(validRegistrationInput == null || validRegistrationInput.trim().isEmpty()) {
             try {
-                conn = Connect.connect();
+                conn = connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, uniqueID);
                 pstmt.setString(2, recipientList.getValue().getId());

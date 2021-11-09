@@ -17,11 +17,12 @@
       </Label>
       <Button layoutX="126.0" layoutY="544.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="112.0" text="View" />
       <Button layoutX="375.0" layoutY="544.0" mnemonicParsing="false" onAction="#onCreateMessagesClicked" prefHeight="39.0" prefWidth="112.0" text="Create Message" />
-      <TableView layoutX="34.0" layoutY="156.0" prefHeight="374.0" prefWidth="556.0">
+      <TableView fx:id="messageList" layoutX="34.0" layoutY="156.0" prefHeight="374.0" prefWidth="556.0">
         <columns>
-          <TableColumn prefWidth="103.0" text="From" />
-          <TableColumn prefWidth="364.0" text="Subject" />
-            <TableColumn minWidth="0.0" prefWidth="88.0" text="Time" />
+          <TableColumn fx:id="fromColumn" prefWidth="74.0" text="From" />
+          <TableColumn fx:id="roleColumn" text="Role" />
+            <TableColumn fx:id="subjectColumn" minWidth="0.0" prefWidth="277.0" text="Subject" />
+            <TableColumn fx:id="timeColumn" prefWidth="124.0" text="Time" />
         </columns>
       </TableView>
    </children>

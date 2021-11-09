@@ -63,14 +63,24 @@ public class LoginController implements Initializable {
         window.show();
     }
 
-    public void redirectToDoctorPortal(ActionEvent event, String id) throws IOException, SQLException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("doctor-appointment-view.fxml"));
+    public void redirectToPortal(ActionEvent event, String role, String id, String fxmlLocation) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlLocation));
         root = loader.load();
 
-        DoctorAppointmentsController doctorController = loader.getController();
-        doctorController.setStaffID(id);
-        doctorController.setDate();
-        doctorController.setName();
+        switch (role){
+            case "Doctor":
+                DoctorAppointmentsController doctorController = loader.getController();
+                doctorController.setStaffID(id);
+                doctorController.setDate();
+                doctorController.setName();
+                break;
+            case "Nurse":
+                break;
+            case "Patient":
+                break;
+
+        }
+
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -78,35 +88,19 @@ public class LoginController implements Initializable {
         window.show();
     }
 
-    public void redirectToNursePortal(ActionEvent event) throws IOException {
-        Parent registerViewParent = FXMLLoader.load(getClass().getResource("register-view.fxml"));
-        Scene registerViewScene = new Scene(registerViewParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene((registerViewScene));
-        window.show();
-    }
-
-    public void redirectToPatientPortal(ActionEvent event) throws IOException {
-        Parent registerViewParent = FXMLLoader.load(getClass().getResource("register-view.fxml"));
-        Scene registerViewScene = new Scene(registerViewParent);
-
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene((registerViewScene));
-        window.show();
-    }
-
     private void redirectPortal(ActionEvent event, String role, String id) throws IOException, SQLException {
-        switch (role){
+        switch (role) {
             case "Doctor":
                 System.out.println("Doctor Redirect");
-                redirectToDoctorPortal(event, id);
+                redirectToPortal(event, role, id, "doctor-appointment-view.fxml");
                 break;
             case "Nurse":
                 System.out.println("Nurse Redirect");
+                redirectToPortal(event, role, id, "nurse-appointment-view.fxml");
                 break;
             case "Patient":
                 System.out.println("Patient Redirect");
+                redirectToPortal(event, role, id, "patient-appointment-view.fxml");
                 break;
         }
     }
@@ -148,6 +142,7 @@ public class LoginController implements Initializable {
                         MessageAlert.incorrectUsernameOrPassword();
                     }
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                     MessageAlert.incorrectUsernameOrPassword();
                 }
                 break;

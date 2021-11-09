@@ -31,10 +31,14 @@ public class DoctorPatientsListController implements Initializable {
     private Parent root;
 
     @FXML
-    private ListView patientList;
+    private ListView<Patient> patientList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        patientList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Patient Name: " + newValue.getFirstName());
+            System.out.println("DoPatient Id: " + newValue.getId());
+        });
     }
 
     public void loadPatientList() throws SQLException {
@@ -50,20 +54,48 @@ public class DoctorPatientsListController implements Initializable {
             listViewData.add(new Patient(rs.getString(1), rs.getString(2), rs.getString(3)));
         }
         ObservableList<Patient> patients = FXCollections.observableArrayList(listViewData);
-        patientList.itemsProperty().setValue(patients);
-        System.out.println(patientList.getItems());
-
-        // TODO: Fix convertComboDisplayList()
-        // ISSUE: Cannot invoke "com.example.hospitalapplication.Doctor.getName()" because "doctor" is null
-        // LINE: 98 and 95, basically in the convertComboDisplayList where doctor.getName() is
-        // Uncomment convertComboDisplayList() below to get the error
-        //convertComboDisplayList();
-
+        patientList.setItems(patients);
     }
 
     @FXML
     public void setStaffID(String id) throws SQLException {
         staffID = id;
+    }
+
+    @FXML
+    public void redirectToPatientProfile(ActionEvent event, String patientId) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("patient-profile-view.fxml"));
+        root = loader.load();
+
+        conn = Connect.connect();
+        String sql = "";
+        PreparedStatement stmt = null;
+        sql = "SELECT patient_profile_id, first_name, last_name, date_of_birth, " +
+                "phone_number, patient_email, insurance_name, pharmacy FROM Patient_Profile WHERE doctor_id = ? AND patient_profile_id = ?";
+        stmt = conn.prepareStatement(sql);
+        stmt.setString(1, staffID);
+        stmt.setString(2, patientId);
+        ResultSet rs = stmt.executeQuery();
+        Patient selectedPatient = null;
+        while(rs.next()) {
+            selectedPatient = new Patient(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4),
+                    rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
+        }
+
+        PatientProfileDetailController patientController = loader.getController();
+        patientController.setStaffID(staffID);
+        patientController.setData(selectedPatient.getId(), selectedPatient.getFirstName(), selectedPatient.getLastName(), selectedPatient.getDateOfBirth(),
+                selectedPatient.getPhoneNumber(), selectedPatient.getEmailAddress(), selectedPatient.getInsuranceName(), selectedPatient.getPharmacy(), staffID);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        window.setScene(scene);
+        window.show();
+    }
+
+    @FXML
+    public void onViewClick(ActionEvent event) throws IOException, SQLException {
+        redirectToPatientProfile(event, patientList.getSelectionModel().getSelectedItem().getId());
     }
 
     @FXML
