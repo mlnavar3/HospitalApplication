@@ -9,18 +9,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -70,7 +66,7 @@ public class RegisterController implements Initializable {
 
         String sql = "";
         PreparedStatement stmt = null;
-        sql = "SELECT staff_id,firstName,lastName FROM Staff WHERE role_id = 1";
+        sql = "SELECT staff_id,first_name,last_name FROM Staff WHERE role_id = 1";
         stmt = conn.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
 

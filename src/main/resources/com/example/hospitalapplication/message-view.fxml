@@ -3,36 +3,38 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hospitalapplication.DoctorViewMessageController">
    <children>
-      <Button layoutX="33.0" layoutY="32.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="112.0" text="&lt;&lt;&lt;" />
-      <Button layoutX="256.0" layoutY="545.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="112.0" text="Reply" />
+      <Button layoutX="33.0" layoutY="32.0" mnemonicParsing="false" onAction="#onBackClicked" prefHeight="39.0" prefWidth="112.0" text="Back" />
+      <Button layoutX="256.0" layoutY="545.0" mnemonicParsing="false" onAction="#onReplyClicked" prefHeight="39.0" prefWidth="112.0" text="Reply" />
       <Label contentDisplay="CENTER" layoutX="64.0" layoutY="128.0" prefHeight="27.0" prefWidth="68.0" text="Subject:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="64.0" layoutY="167.0" prefHeight="310.0" prefWidth="497.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus magna fringilla urna porttitor rhoncus dolor purus non enim. Vulputate odio ut enim blandit volutpat maecenas. Habitasse platea dictumst vestibulum rhoncus. Cursus sit amet dictum sit. Enim nunc faucibus a pellentesque sit amet. Risus pretium quam vulputate dignissim. Varius morbi enim nunc faucibus. Arcu vitae elementum curabitur vitae. Orci nulla pellentesque dignissim enim sit amet venenatis urna. Ultrices tincidunt arcu non sodales neque sodales ut etiam sit. Est ultricies integer quis auctor elit sed. Ipsum suspendisse ultrices gravida dictum fusce ut placerat. Sit amet mauris commodo quis imperdiet massa tincidunt nunc pulvinar. Elementum curabitur vitae nunc sed velit dignissim sodales ut eu. Bibendum ut tristique et egestas quis." wrapText="true">
+      <Label fx:id="contentLbl" alignment="TOP_LEFT" layoutX="64.0" layoutY="191.0" prefHeight="310.0" prefWidth="497.0" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label contentDisplay="CENTER" layoutX="64.0" layoutY="101.0" prefHeight="27.0" prefWidth="68.0" text="From:">
+      <Label contentDisplay="CENTER" layoutX="64.0" layoutY="101.0" prefHeight="27.0" prefWidth="49.0" text="From:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label contentDisplay="CENTER" layoutX="132.0" layoutY="101.0" prefHeight="27.0" prefWidth="425.0">
+      <Label fx:id="fromLbl" contentDisplay="CENTER" layoutX="113.0" layoutY="101.0" prefHeight="27.0" prefWidth="425.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label contentDisplay="CENTER" layoutX="132.0" layoutY="128.0" prefHeight="27.0" prefWidth="425.0">
+      <Label fx:id="subjectLbl" contentDisplay="CENTER" layoutX="132.0" layoutY="128.0" prefHeight="27.0" prefWidth="425.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <Line endX="303.0" layoutX="273.0" layoutY="176.0" startX="-225.0" />
    </children>
 </AnchorPane>

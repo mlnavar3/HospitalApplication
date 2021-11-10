@@ -36,6 +36,6 @@
          </columns>
       </TableView>
       <Button fx:id="viewPatientProfileButton" layoutX="20.0" layoutY="689.0" mnemonicParsing="false" onAction="#onBackClicked" prefHeight="47.0" prefWidth="120.0" text="Back" />
-      <Button fx:id="orderPrescriptionButton" layoutX="220.0" layoutY="689.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="120.0" text="Order Prescription" />
+      <Button fx:id="orderPrescriptionButton" layoutX="220.0" layoutY="689.0" mnemonicParsing="false" onAction="#onOrderPrescriptionClick" prefHeight="47.0" prefWidth="120.0" text="Order Prescription" />
    </children>
 </AnchorPane>

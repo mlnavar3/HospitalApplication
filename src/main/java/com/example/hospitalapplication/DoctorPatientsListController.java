@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,7 +36,7 @@ public class DoctorPatientsListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         patientList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("Patient Name: " + newValue.getFirstName());
-            System.out.println("DoPatient Id: " + newValue.getId());
+            System.out.println("Patient Id: " + newValue.getId());
         });
     }
 
@@ -84,6 +83,7 @@ public class DoctorPatientsListController implements Initializable {
 
         PatientProfileDetailController patientController = loader.getController();
         patientController.setStaffID(staffID);
+        patientController.setPatientID(patientId);
         patientController.setData(selectedPatient.getId(), selectedPatient.getFirstName(), selectedPatient.getLastName(), selectedPatient.getDateOfBirth(),
                 selectedPatient.getPhoneNumber(), selectedPatient.getEmailAddress(), selectedPatient.getInsuranceName(), selectedPatient.getPharmacy(), staffID);
 

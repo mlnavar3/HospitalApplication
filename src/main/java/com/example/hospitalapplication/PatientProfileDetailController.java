@@ -3,7 +3,6 @@ package com.example.hospitalapplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,12 +11,10 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.ResourceBundle;
 
 public class PatientProfileDetailController {
 
@@ -25,6 +22,7 @@ public class PatientProfileDetailController {
     private Parent root;
 
     String staffID = "";
+    String patientID = "";
 
     public String id, firstName, lastName, phoneNumber,
             emailAddress, insuranceCompany, pharmacy;
@@ -50,6 +48,10 @@ public class PatientProfileDetailController {
     public void setStaffID(String id) throws SQLException {
         staffID = id;
     }
+    @FXML
+    public void setPatientID(String id) throws SQLException {
+        patientID = id;
+    }
 
     public void setData(String id, String firstName, String lastName, Date dob, String phoneNumber,
                         String emailAddress, String insuranceCompany, String pharmacy, String staffId){
@@ -74,6 +76,25 @@ public class PatientProfileDetailController {
         else
             orderPrescriptionButton.setVisible(false);
 
+    }
+
+    @FXML
+    public void redirectToOrderPrescription(ActionEvent event, String staffID, String patientID) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("doctor-order-prescription.fxml"));
+        root = loader.load();
+
+        DoctorPrescriptionController doctorPrescriptionController = loader.getController();
+        doctorPrescriptionController.setStaffID(staffID);
+        doctorPrescriptionController.setPatientID(patientID);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        window.setScene(scene);
+        window.show();
+    }
+
+    public void onOrderPrescriptionClick(ActionEvent event) throws SQLException, IOException {
+        redirectToOrderPrescription(event, staffID, patientID);
     }
 
     @FXML

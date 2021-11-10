@@ -1,20 +1,34 @@
 package com.example.hospitalapplication;
 
-public class Message {
+public class StaffMessage {
     private String messageID;
     private String recipientName;
-    private String role;
+    private Patient sender;
     private String subject;
     private String content;
     private String createdAt;
 
-    public Message(String messageID, String recipientName, String role, String subject, String content, String createdAt) {
+    public StaffMessage(String messageID, String recipientName, String subject, String content, String createdAt) {
         this.messageID = messageID;
         this.recipientName = recipientName;
-        this.role = role;
         this.subject = subject;
         this.content = content;
         this.createdAt = createdAt;
+    }
+
+    public StaffMessage(Patient senderName, String subject, String content, String createdAt){
+        this.sender = senderName;
+        this.subject = subject;
+        this.content = content;
+        this.createdAt = createdAt;
+    }
+
+    public Patient getSender() {
+        return sender;
+    }
+
+    public void setSenderName(Patient sender) {
+        this.sender = sender;
     }
 
     public String getMessageID() {
@@ -25,20 +39,12 @@ public class Message {
         this.messageID = messageID;
     }
 
-    public String getRecipientName() {
-        return recipientName;
+    public Patient getRecipientName() {
+        return sender;
     }
 
-    public void setRecipientName(String recipientName) {
-        this.recipientName = recipientName;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setRecipientName(Patient recipientName) {
+        this.sender = recipientName;
     }
 
     public String getSubject() {
@@ -67,6 +73,6 @@ public class Message {
 
     @Override
     public String toString(){
-        return recipientName;
+        return sender.getFullName();
     }
 }

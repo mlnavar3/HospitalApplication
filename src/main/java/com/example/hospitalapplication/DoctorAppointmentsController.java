@@ -99,8 +99,9 @@ public class DoctorAppointmentsController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("doctor-messages-view.fxml"));
         root = loader.load();
 
-        DoctorMessagesController doctorMessagesController = loader.getController();
+        DoctorMessageListController doctorMessagesController = loader.getController();
         doctorMessagesController.setStaffID(id);
+        doctorMessagesController.loadMessageList();
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

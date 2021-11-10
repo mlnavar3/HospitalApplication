@@ -10,10 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.Date;
 
 import static com.example.hospitalapplication.Connect.*;
@@ -70,7 +66,10 @@ public class DoctorCreateMessageController implements Initializable {
             System.out.println("Patient Name: " + newValue.getFirstName() + " " + newValue.getLastName());
             System.out.println("Patient Id: " + newValue.getId());
         });
+    }
 
+    public void loadSelectedRecipient(int index) {
+        recipientList.getSelectionModel().select(index);
     }
 
     public void setStaffID(String id) throws SQLException {
@@ -116,7 +115,7 @@ public class DoctorCreateMessageController implements Initializable {
                 pstmt.setString(6, formatter.format(date));
                 pstmt.executeUpdate();
                 MessageAlert.sendMessageSuccessfulBox();
-                redirectToMessages(event, staffID);
+                //redirectToMessages(event, staffID);
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
@@ -130,8 +129,9 @@ public class DoctorCreateMessageController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("doctor-messages-view.fxml"));
         root = loader.load();
 
-        DoctorMessagesController doctorMessagesController = loader.getController();
+        DoctorMessageListController doctorMessagesController = loader.getController();
         doctorMessagesController.setStaffID(id);
+        doctorMessagesController.loadMessageList();
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

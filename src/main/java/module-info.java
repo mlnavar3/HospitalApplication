@@ -8,4 +8,5 @@ module com.example.hospitalapplication {
 
     opens com.example.hospitalapplication to javafx.fxml;
     exports com.example.hospitalapplication;
+
 }

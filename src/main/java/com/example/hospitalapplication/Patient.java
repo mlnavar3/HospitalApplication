@@ -34,6 +34,8 @@ public class Patient {
         this.lastName = lastName;
     }
 
+    public String getFullName() {return firstName + " " + lastName;}
+
     public String getId() {
         return id;
     }
