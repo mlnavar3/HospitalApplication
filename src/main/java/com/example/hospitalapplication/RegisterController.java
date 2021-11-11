@@ -78,10 +78,6 @@ public class RegisterController implements Initializable {
         ObservableList<Doctor> doctors = FXCollections.observableArrayList(comboboxData);
         doctorList.setItems(doctors);
 
-        doctorList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Doctor Name: " + newValue.getName());
-            System.out.println("Doctor Id: " + newValue.getId());
-        });
     }
 
 

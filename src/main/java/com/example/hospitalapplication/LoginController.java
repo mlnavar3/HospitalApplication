@@ -69,7 +69,7 @@ public class LoginController implements Initializable {
 
         switch (role){
             case "Doctor":
-                DoctorAppointmentsController doctorController = loader.getController();
+                DoctorAppointmentListController doctorController = loader.getController();
                 doctorController.setStaffID(id);
                 doctorController.setDate();
                 doctorController.setName();
@@ -92,7 +92,7 @@ public class LoginController implements Initializable {
         switch (role) {
             case "Doctor":
                 System.out.println("Doctor Redirect");
-                redirectToPortal(event, role, id, "doctor-appointment-view.fxml");
+                redirectToPortal(event, role, id, "doctor-appointment-list-view.fxml");
                 break;
             case "Nurse":
                 System.out.println("Nurse Redirect");

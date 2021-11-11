@@ -1,25 +1,37 @@
 package com.example.hospitalapplication;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
-public class PatientProfileDetailController {
+import static com.example.hospitalapplication.Connect.connect;
 
+public class PatientProfileDetailController implements Initializable {
     private Scene scene;
     private Parent root;
+    Connection conn = null;
 
     String staffID = "";
     String patientID = "";
@@ -39,10 +51,20 @@ public class PatientProfileDetailController {
     @FXML
     private Button orderPrescriptionButton;
 
+    @FXML
+    private TableView<Prescription> prescriptionTable;
+    @FXML
+    private TableColumn<Prescription, String> prescriptionColumn;
+    @FXML
+    private TableColumn<Prescription, Integer> quantityColumn;
+    @FXML
+    private TableColumn<Prescription, Boolean> activeColumn;
 
-    public PatientProfileDetailController(){
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
 
     @FXML
     public void setStaffID(String id) throws SQLException {
@@ -75,6 +97,46 @@ public class PatientProfileDetailController {
             orderPrescriptionButton.setVisible(true);
         else
             orderPrescriptionButton.setVisible(false);
+
+    }
+
+    public void loadPrescriptionList() throws SQLException {
+        conn = Connect.connect();
+
+        String sql1 = "";
+        PreparedStatement stmt1 = null;
+        sql1 = "SELECT prescription_id FROM Patient_Prescription WHERE patient_profile_id = ?";
+        stmt1 = conn.prepareStatement(sql1);
+        stmt1.setString(1, patientID);
+        ResultSet rs1 = stmt1.executeQuery();
+
+        List<Prescription> prescriptionList = new ArrayList<>();
+        while(rs1.next()) {
+            conn = Connect.connect();
+            String sql2 = "SELECT prescription_name, quantity, active FROM Prescription WHERE prescription_id = ?";
+            PreparedStatement stmt2 = null;
+            stmt2 = conn.prepareStatement(sql2);
+            stmt2.setString(1, rs1.getString(1));
+            ResultSet rs2 = stmt2.executeQuery();
+            prescriptionList.add(new Prescription(rs2.getString(1),  rs2.getInt(2), rs2.getBoolean(3)));
+            stmt2.close();
+        }
+
+        stmt1.close();
+        conn.close();
+
+        ObservableList<Prescription> prescriptions = FXCollections.observableArrayList(prescriptionList);
+        prescriptionTable.setItems(prescriptions);
+        setPrescriptionData();
+    }
+
+    public void setPrescriptionData() {
+        prescriptionColumn.setCellValueFactory(name -> new ReadOnlyStringWrapper(name.getValue().getName()));
+        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+    }
+
+    @FXML
+    public void onDeactivateClick(ActionEvent event) throws IOException, SQLException {
 
     }
 

@@ -11,10 +11,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DoctorPrescriptionController {
     String staffID = "";
@@ -37,13 +37,77 @@ public class DoctorPrescriptionController {
     @FXML
     private TextField quantityTxt;
 
-    @FXML
-    public void onOrderClick(ActionEvent event) throws IOException, SQLException {
-        System.out.println("ORDER SENT!");
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
+
+    public String validateInput() {
+        String errorMessage = "";
+
+        if(prescriptionNameTxt.getText() == null || prescriptionNameTxt.getText().trim().isEmpty()) {
+            System.out.println("Prescription name cannot be empty");
+            errorMessage += "Prescription name cannot be empty\n";
+        }
+
+        if(quantityTxt.getText() == null || quantityTxt.getText().trim().isEmpty()) {
+            System.out.println("Prescription quantity cannot be empty");
+            errorMessage += "Prescription quantity cannot be empty\n";
+        }
+
+        if(!isNumeric(quantityTxt.getText())) {
+            System.out.println("Prescription quantity needs to be numeric");
+            errorMessage += "Prescription quantity needs to be numeric\n";
+        }
+
+        // If error message is empty, return true. Otherwise, return false
+        return errorMessage;
     }
 
     @FXML
-    public void redirectToPatientProfile(ActionEvent event, String patientId) throws IOException, SQLException {
+    public void onOrderClick(ActionEvent event) throws IOException, SQLException {
+        String uniqueID = UUID.randomUUID().toString();
+
+        String sql1 = "INSERT INTO Prescription VALUES(?,?,?,?)";
+        String sql2 = "INSERT INTO Patient_Prescription VALUES(?,?)";
+        String validPrescriptionInput = validateInput();
+        if(validPrescriptionInput == null || validPrescriptionInput.trim().isEmpty()) {
+            try {
+                conn = Connect.connect();
+                PreparedStatement pstmt1 = conn.prepareStatement(sql1);
+                pstmt1.setString(1, uniqueID);
+                pstmt1.setString(2, prescriptionNameTxt.getText());
+                pstmt1.setInt(3, Integer.parseInt(quantityTxt.getText()));
+                pstmt1.setBoolean(4, true);
+                pstmt1.executeUpdate();
+                pstmt1.close();
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            try {
+                conn = Connect.connect();
+                PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+                pstmt2.setString(1, patientID);
+                pstmt2.setString(2, uniqueID);
+                pstmt2.executeUpdate();
+                MessageAlert.prescriptionSuccessfulBox();
+                redirectToPatientProfile(event);
+                pstmt2.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            MessageAlert.prescriptionErrorBox(validPrescriptionInput);
+        }
+    }
+
+    @FXML
+    public void redirectToPatientProfile(ActionEvent event) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("patient-profile-view.fxml"));
         root = loader.load();
 
@@ -65,6 +129,7 @@ public class DoctorPrescriptionController {
         PatientProfileDetailController patientController = loader.getController();
         patientController.setStaffID(staffID);
         patientController.setPatientID(patientID);
+        patientController.loadPrescriptionList();
         patientController.setData(selectedPatient.getId(), selectedPatient.getFirstName(), selectedPatient.getLastName(), selectedPatient.getDateOfBirth(),
                 selectedPatient.getPhoneNumber(), selectedPatient.getEmailAddress(), selectedPatient.getInsuranceName(), selectedPatient.getPharmacy(), staffID);
 
@@ -76,11 +141,8 @@ public class DoctorPrescriptionController {
 
     @FXML
     public void onCancelClick(ActionEvent event) throws IOException, SQLException {
-        redirectToPatientProfile(event, patientID);
+        redirectToPatientProfile(event);
     }
-
-
-
 
 
 }

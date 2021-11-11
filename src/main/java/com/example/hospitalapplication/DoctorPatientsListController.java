@@ -84,6 +84,7 @@ public class DoctorPatientsListController implements Initializable {
         PatientProfileDetailController patientController = loader.getController();
         patientController.setStaffID(staffID);
         patientController.setPatientID(patientId);
+        patientController.loadPrescriptionList();
         patientController.setData(selectedPatient.getId(), selectedPatient.getFirstName(), selectedPatient.getLastName(), selectedPatient.getDateOfBirth(),
                 selectedPatient.getPhoneNumber(), selectedPatient.getEmailAddress(), selectedPatient.getInsuranceName(), selectedPatient.getPharmacy(), staffID);
 
@@ -100,10 +101,10 @@ public class DoctorPatientsListController implements Initializable {
 
     @FXML
     public void redirectToAppointments(ActionEvent event, String id) throws IOException, SQLException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("doctor-appointment-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("doctor-appointment-list-view.fxml"));
         root = loader.load();
 
-        DoctorAppointmentsController doctorController = loader.getController();
+        DoctorAppointmentListController doctorController = loader.getController();
         doctorController.setStaffID(id);
         doctorController.setDate();
         doctorController.setName();

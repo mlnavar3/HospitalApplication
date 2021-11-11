@@ -52,6 +52,24 @@ public class MessageAlert {
         alert.showAndWait();
     }
 
+    public static void prescriptionErrorBox(String errorMessage){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error");
+        alert.setContentText(errorMessage);
+
+        alert.showAndWait();
+    }
+
+    public static void prescriptionSuccessfulBox() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Success");
+        alert.setHeaderText("Success");
+        alert.setContentText("Prescription request has been sent!");
+
+        alert.showAndWait();
+    }
+
     public static void sqlError(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

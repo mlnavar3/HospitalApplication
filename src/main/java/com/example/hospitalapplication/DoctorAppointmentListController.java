@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
-public class DoctorAppointmentsController implements Initializable {
+public class DoctorAppointmentListController implements Initializable {
     String staffID = "";
     Connection conn = null;
 
