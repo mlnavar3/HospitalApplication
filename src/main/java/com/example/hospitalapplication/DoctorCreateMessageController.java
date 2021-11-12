@@ -115,7 +115,6 @@ public class DoctorCreateMessageController implements Initializable {
                 pstmt.setString(6, formatter.format(date));
                 pstmt.executeUpdate();
                 MessageAlert.sendMessageSuccessfulBox();
-                //redirectToMessages(event, staffID);
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }

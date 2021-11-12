@@ -196,6 +196,7 @@ public class DoctorAppointmentListController implements Initializable {
 
         DoctorAppointmentController doctorAppointmentController = loader.getController();
         doctorAppointmentController.setPatientID(appointment.getPatientID());
+        doctorAppointmentController.setName(appointment.getPatientName());
         doctorAppointmentController.setWeight(appointment.getWeight());
         doctorAppointmentController.setHeight(appointment.getHeight());
         doctorAppointmentController.setBodyTemp(appointment.getBodyTemp());
