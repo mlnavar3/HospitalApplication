@@ -97,6 +97,24 @@ public class MessageAlert {
         alert.showAndWait();
     }
 
+    public static void diagnosisErrorBox() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error");
+        alert.setContentText("Appointment is not ready for diagnosis!");
+
+        alert.showAndWait();
+    }
+
+    public static void diagnosisCompleteErrorBox() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error");
+        alert.setContentText("Appointment has already been completed!");
+
+        alert.showAndWait();
+    }
+
     public static void appointmentSuccessfulBox() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Success");

@@ -155,73 +155,75 @@ public class DoctorAppointmentController {
 
     @FXML
     private void onCompleteClick(ActionEvent event) throws SQLException, IOException {
-        for (int i = 0; i < diagnosisArray.size(); i++) {
-            MedicalHistory medicalHistory = diagnosisList.getItems().get(i);
-            String sql1 = "INSERT INTO Medical_History VALUES(?,?,?)";
-            try {
-                conn = Connect.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql1);
-                pstmt.setString(1, medicalHistory.getId());
-                pstmt.setString(2, medicalHistory.getDiagnosis());
-                pstmt.setString(3, medicalHistory.getDate());
-                pstmt.executeUpdate();
-                pstmt.close();
-                conn.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-            String sql2 = "INSERT INTO Patient_Medical_History VALUES(?,?)";
-            try {
-                conn = Connect.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql2);
-                pstmt.setString(1, patientID);
-                pstmt.setString(2, medicalHistory.getId());
-                pstmt.executeUpdate();
-                pstmt.close();
-                conn.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        for (int j = 0; j < prescriptionArray.size(); j++) {
-            Prescription prescription = prescriptionList.getItems().get(j);
-            String sql1 = "INSERT INTO Prescription VALUES(?,?,?,?)";
-            try {
-                conn = Connect.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql1);
-                pstmt.setString(1, prescription.getId());
-                pstmt.setString(2, prescription.getName());
-                pstmt.setInt(3, prescription.getQuantity());
-                pstmt.setBoolean(4, prescription.getActive());
-                pstmt.executeUpdate();
-                pstmt.close();
-                conn.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-            String sql2 = "INSERT INTO Patient_Prescription VALUES(?,?)";
-            try {
-                conn = Connect.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql2);
-                System.out.println(patientID);
-                System.out.println(prescription.getId());
-                pstmt.setString(1, patientID);
-                pstmt.setString(2, prescription.getId());
-                pstmt.executeUpdate();
-                pstmt.close();
-                conn.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        String sql2 = "UPDATE [Appointment ] SET doctor_summary = ? WHERE appointment_id = ?";
-
+        String sql = "UPDATE [Appointment ] SET doctor_summary = ? WHERE appointment_id = ?";
         if(summaryTxtArea.getText() == null || summaryTxtArea.getText().trim().isEmpty()) {
             MessageAlert.summaryErrorBox();
         } else {
+            for (int i = 0; i < diagnosisArray.size(); i++) {
+                System.out.println("diagnosis " + i);
+                MedicalHistory medicalHistory = diagnosisList.getItems().get(i);
+                String sql1 = "INSERT INTO Medical_History VALUES(?,?,?)";
+                try {
+                    conn = Connect.connect();
+                    PreparedStatement pstmt = conn.prepareStatement(sql1);
+                    pstmt.setString(1, medicalHistory.getId());
+                    pstmt.setString(2, medicalHistory.getDiagnosis());
+                    pstmt.setString(3, medicalHistory.getDate());
+                    pstmt.executeUpdate();
+                    pstmt.close();
+                    conn.close();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+                String sql2 = "INSERT INTO Patient_Medical_History VALUES(?,?)";
+                try {
+                    conn = Connect.connect();
+                    PreparedStatement pstmt = conn.prepareStatement(sql2);
+                    pstmt.setString(1, patientID);
+                    pstmt.setString(2, medicalHistory.getId());
+                    pstmt.executeUpdate();
+                    pstmt.close();
+                    conn.close();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            for (int j = 0; j < prescriptionArray.size(); j++) {
+                System.out.println("prescription " + j);
+                Prescription prescription = prescriptionList.getItems().get(j);
+                String sql1 = "INSERT INTO Prescription VALUES(?,?,?,?)";
+                try {
+                    conn = Connect.connect();
+                    PreparedStatement pstmt = conn.prepareStatement(sql1);
+                    pstmt.setString(1, prescription.getId());
+                    pstmt.setString(2, prescription.getName());
+                    pstmt.setInt(3, prescription.getQuantity());
+                    pstmt.setBoolean(4, prescription.getActive());
+                    pstmt.executeUpdate();
+                    pstmt.close();
+                    conn.close();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+                String sql2 = "INSERT INTO Patient_Prescription VALUES(?,?)";
+                try {
+                    conn = Connect.connect();
+                    PreparedStatement pstmt = conn.prepareStatement(sql2);
+                    System.out.println(patientID);
+                    System.out.println(prescription.getId());
+                    pstmt.setString(1, patientID);
+                    pstmt.setString(2, prescription.getId());
+                    pstmt.executeUpdate();
+                    pstmt.close();
+                    conn.close();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+
             try {
                 conn = Connect.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql2);
+                PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, summaryTxtArea.getText());
                 pstmt.setString(2, appointmentID);
                 pstmt.executeUpdate();
@@ -230,9 +232,10 @@ public class DoctorAppointmentController {
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
+
+            MessageAlert.appointmentSuccessfulBox();
+            redirectToAppointments(event);
         }
-        MessageAlert.appointmentSuccessfulBox();
-        redirectToAppointments(event);
     }
 
     @FXML

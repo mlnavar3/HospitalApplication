@@ -207,7 +207,14 @@ public class DoctorAppointmentListController implements Initializable {
 
     public void onDiagnosisClicked(ActionEvent event) throws IOException, SQLException {
         Appointment selectedAppointment = tableView.getSelectionModel().getSelectedItem();
-        redirectToDiagnosis(event, selectedAppointment);
+        if(selectedAppointment.getStatus() == "Ready") {
+            redirectToDiagnosis(event, selectedAppointment);
+        } else if (selectedAppointment.getStatus() == "Complete") {
+            MessageAlert.diagnosisCompleteErrorBox();
+        } else {
+            MessageAlert.diagnosisErrorBox();
+        }
+
     }
 
 }
