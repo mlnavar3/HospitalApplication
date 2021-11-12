@@ -31,14 +31,16 @@ public class Appointment {
 
         if(weight == 0 || height == 0 || bodyTemp == 0) {
             this.status = "Incomplete";
-        } else if (weight == 0 || height == 0 || bodyTemp == 0 || doctorSummary == null) {
+        } else if (doctorSummary == null || doctorSummary.trim().isEmpty()) {
             this.status = "Ready";
         } else {
             this.status = "Complete";
         }
     }
 
-    public Appointment(String patientName, double weight, double height, double bodyTemp, String bloodPressure, String doctorSummary) {
+    public Appointment(String patientName, double weight, double height, double bodyTemp, String bloodPressure, String doctorSummary, String id, String appID) {
+        this.id = appID;
+        this.patientID = id;
         this.patientName = patientName;
         this.weight = weight;
         this.height = height;
@@ -46,7 +48,7 @@ public class Appointment {
         this.bloodPressure = bloodPressure;
         if(weight == 0 || height == 0 || bodyTemp == 0) {
             this.status = "Incomplete";
-        } else if (weight > 0 || height > 0 || bodyTemp > 0 || doctorSummary == null) {
+        } else if (doctorSummary == null || doctorSummary.trim().isEmpty()) {
             this.status = "Ready";
         } else {
             this.status = "Complete";

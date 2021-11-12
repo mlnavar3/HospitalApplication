@@ -1,14 +1,16 @@
 package com.example.hospitalapplication;
 
-import java.util.Date;
+
 
 public class Prescription {
 
+     private String id;
      private String name;
      private int quantity;
      private Boolean active;
 
-     public Prescription(String name, int quantity, Boolean active) {
+     public Prescription(String id, String name, int quantity, Boolean active) {
+          this.id = id;
           this.name = name;
           this.quantity = quantity;
           this.active = active;
@@ -38,4 +40,11 @@ public class Prescription {
           this.active = active;
      }
 
+     public String getId() {
+          return id;
+     }
+
+     public void setId(String id) {
+          this.id = id;
+     }
 }

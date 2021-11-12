@@ -1,6 +1,6 @@
 package com.example.hospitalapplication;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class MedicalHistory {
     private String id;

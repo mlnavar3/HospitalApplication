@@ -85,6 +85,7 @@ public class DoctorPatientsListController implements Initializable {
         patientController.setStaffID(staffID);
         patientController.setPatientID(patientId);
         patientController.loadPrescriptionList();
+        patientController.loadMedicalHistoryList();
         patientController.setData(selectedPatient.getId(), selectedPatient.getFirstName(), selectedPatient.getLastName(), selectedPatient.getDateOfBirth(),
                 selectedPatient.getPhoneNumber(), selectedPatient.getEmailAddress(), selectedPatient.getInsuranceName(), selectedPatient.getPharmacy(), staffID);
 

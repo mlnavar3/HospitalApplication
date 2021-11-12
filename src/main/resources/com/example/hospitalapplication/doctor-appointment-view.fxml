@@ -28,18 +28,18 @@
       <Label layoutX="14.0" layoutY="143.0" prefHeight="22.0" prefWidth="57.0" text="Diagnosis:" />
       <Button fx:id="addDiagnosisBtn" layoutX="226.0" layoutY="142.0" mnemonicParsing="false" onAction="#addDiagnosis" prefHeight="25.0" prefWidth="86.0" text="Add" />
       <Line endX="207.0" layoutX="112.0" layoutY="368.0" startX="-106.0" />
-      <TextArea fx:id="summaryTxtArea" layoutX="10.0" layoutY="647.0" prefHeight="103.0" prefWidth="308.0" />
+      <TextArea fx:id="summaryTxtArea" layoutX="10.0" layoutY="647.0" prefHeight="103.0" prefWidth="308.0" wrapText="true" />
       <Label layoutX="9.0" layoutY="625.0" prefHeight="22.0" prefWidth="57.0" text="Summary:" />
-      <Button fx:id="completeBtn" layoutX="116.0" layoutY="758.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="86.0" text="Complete" />
+      <Button fx:id="completeBtn" layoutX="116.0" layoutY="758.0" mnemonicParsing="false" onAction="#onCompleteClick" prefHeight="37.0" prefWidth="86.0" text="Complete" />
       <Line endX="207.0" layoutX="112.0" layoutY="625.0" startX="-106.0" />
       <TextField fx:id="prescriptionTxt" layoutX="87.0" layoutY="378.0" prefHeight="25.0" prefWidth="133.0" />
       <Label layoutX="14.0" layoutY="379.0" prefHeight="22.0" prefWidth="69.0" text="Prescription:" />
       <Button fx:id="addPrescriptionBtn" layoutX="226.0" layoutY="378.0" mnemonicParsing="false" onAction="#addPrescription" prefHeight="50.0" prefWidth="86.0" text="Add" />
-      <Button fx:id="removeDiagnosisBtn" layoutX="115.0" layoutY="331.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" text="Remove" />
-      <Button fx:id="removePrescriptionBtn" layoutX="115.0" layoutY="591.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" text="Remove" />
+      <Button fx:id="removeDiagnosisBtn" layoutX="115.0" layoutY="331.0" mnemonicParsing="false" onAction="#removeDiagnosis" prefHeight="25.0" prefWidth="86.0" text="Remove" />
+      <Button fx:id="removePrescriptionBtn" layoutX="115.0" layoutY="591.0" mnemonicParsing="false" onAction="#removePrescription" prefHeight="25.0" prefWidth="86.0" text="Remove" />
       <TextField fx:id="quantityTxt" layoutX="87.0" layoutY="403.0" prefHeight="25.0" prefWidth="133.0" />
       <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="405.0" prefHeight="22.0" prefWidth="69.0" text="Quantity:" />
-      <TableView layoutX="6.0" layoutY="437.0" prefHeight="148.0" prefWidth="314.0">
+      <TableView fx:id="prescriptionList" layoutX="6.0" layoutY="437.0" prefHeight="148.0" prefWidth="314.0">
         <columns>
           <TableColumn fx:id="prescriptionColumn" prefWidth="238.0" text="Prescription" />
           <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="Quantity" />

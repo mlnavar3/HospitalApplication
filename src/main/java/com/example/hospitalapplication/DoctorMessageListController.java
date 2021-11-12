@@ -61,7 +61,6 @@ public class DoctorMessageListController implements Initializable {
 
     public void loadMessageList() throws SQLException {
         conn = connect();
-        System.out.println(staffID);
         String sql1 = "";
         PreparedStatement stmt1 = null;
         sql1 = "SELECT p.patient_profile_id, p.first_name, p.last_name, s.message_id, s.recipient_id, s.subject, s.content, s.created_at " +

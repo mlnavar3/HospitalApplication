@@ -23,8 +23,8 @@
       <Label fx:id="pharmacyLabel" layoutX="80.0" layoutY="147.0" prefHeight="25.0" prefWidth="267.0" />
       <TableView fx:id="diagnosisTable" layoutX="16.0" layoutY="203.0" prefHeight="228.0" prefWidth="331.0">
          <columns>
-            <TableColumn prefWidth="254.0" text="Diagnosis" />
-            <TableColumn prefWidth="76.0" text="Date" />
+            <TableColumn fx:id="diagnosisColumn" prefWidth="254.0" text="Diagnosis" />
+            <TableColumn fx:id="dateColumn" prefWidth="76.0" text="Date" />
          </columns>
       </TableView>
       <Line endX="162.0" layoutX="184.0" layoutY="186.0" startX="-168.0" />

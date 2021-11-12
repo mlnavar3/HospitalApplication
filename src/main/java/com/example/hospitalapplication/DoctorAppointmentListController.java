@@ -90,7 +90,7 @@ public class DoctorAppointmentListController implements Initializable {
         conn = connect();
         String sql1 = "";
         PreparedStatement stmt1 = null;
-        sql1 = "SELECT a.weight, a.height, a.body_temperature, a.blood_pressure, a.doctor_summary, a.appointment_date, p.patient_profile_id, p.first_name, p.last_name " +
+        sql1 = "SELECT a.weight, a.height, a.body_temperature, a.blood_pressure, a.doctor_summary, a.appointment_date, p.patient_profile_id, p.first_name, p.last_name, a.appointment_id " +
                 "FROM Shift s " +
                 "INNER JOIN [Appointment ] a " +
                 "ON a.appointment_id = s.appointment_id " +
@@ -107,7 +107,7 @@ public class DoctorAppointmentListController implements Initializable {
             String appDt = rs1.getString(6).substring(0,10);  // Start date
 
             if(dt.equals(appDt)) {
-                appointmentList.add(new Appointment(rs1.getString(8) + " " + rs1.getString(9), rs1.getDouble(1), rs1.getDouble(2), rs1.getDouble(3), rs1.getString(4), rs1.getString(5)));
+                appointmentList.add(new Appointment(rs1.getString(8) + " " + rs1.getString(9), rs1.getDouble(1), rs1.getDouble(2), rs1.getDouble(3), rs1.getString(4), rs1.getString(5), rs1.getString(7),rs1.getString(10)));
             }
         }
 
@@ -116,6 +116,7 @@ public class DoctorAppointmentListController implements Initializable {
 
         rs1.close();
         conn.close();
+        setTableViewData();
     }
 
     public void setTableViewData() {
@@ -132,7 +133,6 @@ public class DoctorAppointmentListController implements Initializable {
         dt = sdf.format(c.getTime());
         date.setText(dt);
         loadAppointmentList();
-        setTableViewData();
     }
 
     public void changeToPreviousDay() throws ParseException, SQLException {
@@ -144,11 +144,6 @@ public class DoctorAppointmentListController implements Initializable {
         dt = sdf.format(c.getTime());
         date.setText(dt);
         loadAppointmentList();
-        setTableViewData();
-    }
-
-    public void onStartDiagnosisClick() {
-        System.out.println("Start Diagnosis button clicked!");
     }
 
     @FXML
@@ -195,6 +190,8 @@ public class DoctorAppointmentListController implements Initializable {
         root = loader.load();
 
         DoctorAppointmentController doctorAppointmentController = loader.getController();
+        doctorAppointmentController.setAppointmentID(appointment.getId());
+        doctorAppointmentController.setStaffID(staffID);
         doctorAppointmentController.setPatientID(appointment.getPatientID());
         doctorAppointmentController.setName(appointment.getPatientName());
         doctorAppointmentController.setWeight(appointment.getWeight());
@@ -210,10 +207,6 @@ public class DoctorAppointmentListController implements Initializable {
 
     public void onDiagnosisClicked(ActionEvent event) throws IOException, SQLException {
         Appointment selectedAppointment = tableView.getSelectionModel().getSelectedItem();
-        System.out.println(selectedAppointment.getWeight());
-        System.out.println(selectedAppointment.getHeight());
-        System.out.println(selectedAppointment.getBodyTemp());
-        System.out.println(selectedAppointment.getBloodPressure());
         redirectToDiagnosis(event, selectedAppointment);
     }
 

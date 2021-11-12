@@ -60,6 +60,13 @@ public class PatientProfileDetailController implements Initializable {
     @FXML
     private TableColumn<Prescription, Boolean> activeColumn;
 
+    @FXML
+    private TableView<MedicalHistory> diagnosisTable;
+    @FXML
+    private TableColumn<MedicalHistory, String> diagnosisColumn;
+    @FXML
+    private TableColumn<MedicalHistory, String> dateColumn;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -100,6 +107,41 @@ public class PatientProfileDetailController implements Initializable {
 
     }
 
+    public void loadMedicalHistoryList() throws SQLException {
+        conn = Connect.connect();
+
+        String sql1 = "";
+        PreparedStatement stmt1 = null;
+        sql1 = "SELECT medical_history_id FROM Patient_Medical_History WHERE patient_profile_id = ?";
+        stmt1 = conn.prepareStatement(sql1);
+        stmt1.setString(1, patientID);
+        ResultSet rs1 = stmt1.executeQuery();
+
+        List<MedicalHistory> medicalHistoryList = new ArrayList<>();
+        while(rs1.next()) {
+            conn = Connect.connect();
+            String sql2 = "SELECT diagnosis, diagnosis_date FROM Medical_History WHERE medical_history_id = ?";
+            PreparedStatement stmt2 = null;
+            stmt2 = conn.prepareStatement(sql2);
+            stmt2.setString(1, rs1.getString(1));
+            ResultSet rs2 = stmt2.executeQuery();
+            medicalHistoryList.add(new MedicalHistory(rs1.getString(1), rs2.getString(1), rs2.getString(2)));
+            stmt2.close();
+        }
+
+        stmt1.close();
+        conn.close();
+
+        ObservableList<MedicalHistory> medicalHistories = FXCollections.observableArrayList(medicalHistoryList);
+        diagnosisTable.setItems(medicalHistories);
+        setMedicalHistoryData();
+    }
+
+    public void setMedicalHistoryData() {
+        diagnosisColumn.setCellValueFactory(diagnosis -> new ReadOnlyStringWrapper(diagnosis.getValue().getDiagnosis()));
+        dateColumn.setCellValueFactory(diagnosis -> new ReadOnlyStringWrapper(diagnosis.getValue().getDate()));
+    }
+
     public void loadPrescriptionList() throws SQLException {
         conn = Connect.connect();
 
@@ -113,12 +155,12 @@ public class PatientProfileDetailController implements Initializable {
         List<Prescription> prescriptionList = new ArrayList<>();
         while(rs1.next()) {
             conn = Connect.connect();
-            String sql2 = "SELECT prescription_name, quantity, active FROM Prescription WHERE prescription_id = ?";
+            String sql2 = "SELECT prescription_id, prescription_name, quantity, active FROM Prescription WHERE prescription_id = ?";
             PreparedStatement stmt2 = null;
             stmt2 = conn.prepareStatement(sql2);
             stmt2.setString(1, rs1.getString(1));
             ResultSet rs2 = stmt2.executeQuery();
-            prescriptionList.add(new Prescription(rs2.getString(1),  rs2.getInt(2), rs2.getBoolean(3)));
+            prescriptionList.add(new Prescription(rs2.getString(1),  rs2.getString(2), rs2.getInt(3), rs2.getBoolean(4)));
             stmt2.close();
         }
 

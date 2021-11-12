@@ -79,6 +79,42 @@ public class MessageAlert {
         alert.showAndWait();
     }
 
+    public static void medicalHistoryErrorBox(String errorMessage){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error");
+        alert.setContentText(errorMessage);
+
+        alert.showAndWait();
+    }
+
+    public static void medicalHistorySuccessfulBox() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Success");
+        alert.setHeaderText("Success");
+        alert.setContentText("Prescription request has been sent!");
+
+        alert.showAndWait();
+    }
+
+    public static void appointmentSuccessfulBox() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Success");
+        alert.setHeaderText("Success");
+        alert.setContentText("Appointment is complete!");
+
+        alert.showAndWait();
+    }
+
+    public static void summaryErrorBox() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error");
+        alert.setContentText("Summary cannot be empty, if there is nothing to say type N/A");
+
+        alert.showAndWait();
+    }
+
     public static void sqlError(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
