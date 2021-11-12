@@ -37,4 +37,5 @@ public class Prescription {
      public void setActive(Boolean active) {
           this.active = active;
      }
+
 }

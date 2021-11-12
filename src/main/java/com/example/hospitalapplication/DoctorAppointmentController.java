@@ -1,11 +1,11 @@
 package com.example.hospitalapplication;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -21,6 +21,11 @@ public class DoctorAppointmentController {
     private Scene scene;
     private Parent root;
     Connection conn = null;
+
+    @FXML
+    private ListView<MedicalHistory> diagnosisList;
+    @FXML
+    private TableView<Prescription> prescriptionList;
 
     @FXML
     private Label nameLbl;
@@ -42,8 +47,8 @@ public class DoctorAppointmentController {
     @FXML
     private TextArea summaryTxtArea;
 
-    List<MedicalHistory> diagnosisList = new ArrayList<>();
-    List<Prescription> prescriptionList = new ArrayList<>();
+    List<MedicalHistory> diagnosisArray = new ArrayList<>();
+    List<Prescription> prescriptionArray = new ArrayList<>();
 
     public void setPatientID(String id) throws SQLException {
         patientID = id;
@@ -65,24 +70,29 @@ public class DoctorAppointmentController {
         bloodPressureLbl.setText(bloodPressure + " mmHg");
     }
 
+
+    public void updateDiagnosisList() {
+        ObservableList<MedicalHistory> diagnosis = FXCollections.observableArrayList(diagnosisArray);
+        diagnosisList.setItems(diagnosis);
+    }
+
     public void addDiagnosis() {
         String uniqueID = UUID.randomUUID().toString();
         String timeStamp = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime());
         MedicalHistory medicalHistory = new MedicalHistory(uniqueID, diagnosisTxt.getText(), timeStamp);
-        diagnosisList.add(medicalHistory);
-    }
-
-    public void updateDiagnosisList() {
-
+        diagnosisArray.add(medicalHistory);
+        updateDiagnosisList();
     }
 
     public void addPrescription() {
         Prescription prescription = new Prescription(prescriptionTxt.getText(), Integer.parseInt(quantityTxt.getText()), true);
-        prescriptionList.add(prescription);
+        prescriptionArray.add(prescription);
     }
 
     public void updatePrescriptionList() {
-
+        ObservableList<Prescription> prescriptions = FXCollections.observableArrayList(prescriptionArray);
+        prescriptionList.setItems(prescriptions);
+        updatePrescriptionList();
     }
 
 }
