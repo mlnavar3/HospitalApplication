@@ -83,7 +83,6 @@ public class DoctorMessageListController implements Initializable {
         }
 
         ObservableList<StaffMessage> staffMessages = FXCollections.observableArrayList(staffMessageList);
-        System.out.println("STAFFMESSAGES: " + staffMessages);
         tableView.setItems(staffMessages);
     }
 

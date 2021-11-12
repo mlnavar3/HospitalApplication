@@ -33,11 +33,11 @@
       </Label>
       <Button layoutX="375.0" layoutY="137.0" mnemonicParsing="false" onAction="#changeToNextDay" prefHeight="25.0" prefWidth="38.0" text="&gt;&gt;" />
       <Button layoutX="210.0" layoutY="137.0" mnemonicParsing="false" onAction="#changeToPreviousDay" prefHeight="25.0" prefWidth="38.0" text="&lt;&lt;" />
-      <Button layoutX="255.0" layoutY="544.0" mnemonicParsing="false" onAction="#onStartDiagnosisClick" prefHeight="39.0" prefWidth="112.0" text="Start Diagnosis" />
-      <TableView layoutX="14.0" layoutY="169.0" prefHeight="364.0" prefWidth="594.0">
+      <Button layoutX="255.0" layoutY="544.0" mnemonicParsing="false" onAction="#onDiagnosisClicked" prefHeight="39.0" prefWidth="112.0" text="Start Diagnosis" />
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="169.0" prefHeight="364.0" prefWidth="594.0">
         <columns>
-          <TableColumn prefWidth="485.0" text="Patient" />
-          <TableColumn prefWidth="108.0" text="Status" />
+          <TableColumn fx:id="patientColumn" prefWidth="485.0" text="Patient" />
+          <TableColumn fx:id="statusColumn" prefWidth="108.0" text="Status" />
         </columns>
       </TableView>
    </children>

@@ -101,7 +101,7 @@ public class DoctorCreateMessageController implements Initializable {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
 
-        String sql = "INSERT INTO Messages VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO Patient_Messages VALUES(?,?,?,?,?,?)";
 
         if(validRegistrationInput == null || validRegistrationInput.trim().isEmpty()) {
             try {

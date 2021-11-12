@@ -73,6 +73,8 @@ public class LoginController implements Initializable {
                 doctorController.setStaffID(id);
                 doctorController.setDate();
                 doctorController.setName();
+                doctorController.loadAppointmentList();
+                doctorController.setTableViewData();
                 break;
             case "Nurse":
                 break;

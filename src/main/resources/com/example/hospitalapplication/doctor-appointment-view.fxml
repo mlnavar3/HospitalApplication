@@ -8,19 +8,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="782.0" prefWidth="325.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="782.0" prefWidth="325.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hospitalapplication.DoctorAppointmentController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" prefHeight="22.0" prefWidth="37.0" text="Name:" />
-      <Label layoutX="51.0" layoutY="14.0" prefHeight="22.0" prefWidth="254.0" />
+      <Label fx:id="nameLbl" layoutX="51.0" layoutY="14.0" prefHeight="22.0" prefWidth="254.0" />
       <Label layoutX="14.0" layoutY="36.0" prefHeight="22.0" prefWidth="45.0" text="Weight:" />
-      <Label layoutX="60.0" layoutY="36.0" prefHeight="22.0" prefWidth="254.0" />
+      <Label fx:id="weightLbl" layoutX="60.0" layoutY="36.0" prefHeight="22.0" prefWidth="254.0" />
       <Label layoutX="14.0" layoutY="58.0" prefHeight="22.0" prefWidth="45.0" text="Height:" />
-      <Label layoutX="56.0" layoutY="58.0" prefHeight="22.0" prefWidth="260.0" />
+      <Label fx:id="heightLbl" layoutX="56.0" layoutY="58.0" prefHeight="22.0" prefWidth="260.0" />
       <Label layoutX="14.0" layoutY="80.0" prefHeight="22.0" prefWidth="105.0" text="Body Temperature:" />
-      <Label layoutX="119.0" layoutY="80.0" prefHeight="22.0" prefWidth="197.0" />
+      <Label fx:id="bodyTempLbl" layoutX="119.0" layoutY="80.0" prefHeight="22.0" prefWidth="197.0" />
       <Label layoutX="14.0" layoutY="102.0" prefHeight="22.0" prefWidth="86.0" text="Blood Pressure:" />
-      <Label layoutX="100.0" layoutY="102.0" prefHeight="22.0" prefWidth="213.0" />
+      <Label fx:id="bloodPressureLbl" layoutX="100.0" layoutY="102.0" prefHeight="22.0" prefWidth="213.0" />
       <ListView fx:id="diagnosisList" layoutX="6.0" layoutY="174.0" prefHeight="148.0" prefWidth="314.0" />
       <Line endX="207.0" layoutX="113.0" layoutY="133.0" startX="-106.0" />
       <TextField fx:id="diagnosisTxt" layoutX="71.0" layoutY="142.0" />
