@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Application extends javafx.application.Application {
+    // heyyyy Kai was here
     public static List<Stage> stageval = new ArrayList<Stage>();
     public static List<String> fxmlval = new ArrayList<String>();
 
