@@ -52,6 +52,15 @@ public class MessageAlert {
         alert.showAndWait();
     }
 
+    public static void viewMsgError(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("View Message Error");
+        alert.setContentText("Select a message to view");
+
+        alert.showAndWait();
+    }
+
     public static void prescriptionErrorBox(String errorMessage){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
