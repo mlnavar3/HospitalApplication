@@ -79,6 +79,10 @@ public class LoginController implements Initializable {
             case "Nurse":
                 break;
             case "Patient":
+                PatientAppointmentViewController patientController = loader.getController();
+                patientController.setPatientID(id);
+                patientController.setDate();
+                patientController.setName();
                 break;
 
         }
@@ -164,6 +168,7 @@ public class LoginController implements Initializable {
                         redirectPortal(event, "Patient", patientID);
                     }
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                     MessageAlert.incorrectUsernameOrPassword();
                 }
                 break;
