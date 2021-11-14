@@ -15,7 +15,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="nurseWlcm" layoutX="300.0" layoutY="39.0" prefHeight="29.0" prefWidth="65.0">
+      <Label fx:id="nurseWlcm" layoutX="300.0" layoutY="39.0" prefHeight="29.0" prefWidth="152.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -34,11 +34,12 @@
       </Label>
       <TableView fx:id="tableView" layoutX="36.0" layoutY="172.0" prefHeight="326.0" prefWidth="515.0">
         <columns>
-          <TableColumn prefWidth="167.0" text="Patient" />
-          <TableColumn prefWidth="175.0" text="Doctor" />
-            <TableColumn prefWidth="172.0" text="Status" />
+          <TableColumn fx:id="patientCol" prefWidth="167.0" text="Patient" />
+          <TableColumn fx:id="doctorCol" prefWidth="175.0" text="Doctor" />
+            <TableColumn fx:id="statusCol" prefWidth="172.0" text="Status" />
         </columns>
       </TableView>
       <Button layoutX="217.0" layoutY="510.0" mnemonicParsing="false" onAction="#onStartAptNotes" text="Start Appointment Notes" />
+      <Button layoutX="452.0" layoutY="36.0" mnemonicParsing="false" onAction="#onNewApt" prefHeight="35.0" prefWidth="106.0" text="New Appointment" />
    </children>
 </AnchorPane>
