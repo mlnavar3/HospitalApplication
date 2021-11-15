@@ -103,7 +103,7 @@ public class NurseMessageListController implements Initializable{
     //go back to appointments
     public void redirectToAppointments(ActionEvent event, String id) throws IOException, SQLException
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("nurseapt1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("nurse-appointment-view.fxml"));
         root = loader.load();
 
         NurseAppointmentsController nurseController = loader.getController();
