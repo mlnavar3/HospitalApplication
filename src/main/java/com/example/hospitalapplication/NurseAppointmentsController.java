@@ -98,7 +98,7 @@ public class NurseAppointmentsController implements Initializable
         nurseWlcm.setText(name);
     }
 
-    //get the doctors name for an appointment
+    //get the doctors name for an appointment by passing in the appointment id
     public String getDoctorName(String aptID) throws SQLException {
         conn = connect();
         String sql1 = "";
