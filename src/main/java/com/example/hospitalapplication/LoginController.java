@@ -83,6 +83,7 @@ public class LoginController implements Initializable {
                 patientController.setPatientID(id);
                 patientController.setDate();
                 patientController.setName();
+                patientController.loadAppointmentList();
                 break;
 
         }

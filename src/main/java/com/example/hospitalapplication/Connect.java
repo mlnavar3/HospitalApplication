@@ -7,8 +7,8 @@ public class Connect {
     // SQLite
     public static Connection connect() {
         // replace "url" variable with your own database path
-         String url = "jdbc:sqlite:C:/Users/Tommy/Documents/asu/CSE360/database/hospital.db";
-        //String url = "jdbc:sqlite:C:/Users/samqu/Documents/Databases/hospital project/hospital.db";
+         //String url = "jdbc:sqlite:C:/Users/Tommy/Documents/asu/CSE360/database/hospital.db";
+        String url = "jdbc:sqlite:C:/Users/samqu/Documents/Databases/hospital project/hospital.db";
         Connection conn = null;
         try {
             // create a connection to the database

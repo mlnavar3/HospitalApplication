@@ -183,13 +183,13 @@ public class PatientProfileDetailController implements Initializable {
     }
 
     @FXML
-    public void redirectToOrderPrescription(ActionEvent event, String staffID, String patientID) throws IOException, SQLException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("doctor-order-prescription.fxml"));
+    public void redirectToOrderPrescription(ActionEvent event, String patientID) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("patient-order-prescription.fxml"));
         root = loader.load();
 
-        DoctorPrescriptionController doctorPrescriptionController = loader.getController();
-        doctorPrescriptionController.setStaffID(staffID);
-        doctorPrescriptionController.setPatientID(patientID);
+//        DoctorPrescriptionController doctorPrescriptionController = loader.getController();
+//        doctorPrescriptionController.setStaffID(staffID);
+//        doctorPrescriptionController.setPatientID(patientID);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -198,17 +198,13 @@ public class PatientProfileDetailController implements Initializable {
     }
 
     public void onOrderPrescriptionClick(ActionEvent event) throws SQLException, IOException {
-        redirectToOrderPrescription(event, staffID, patientID);
+        redirectToOrderPrescription(event, patientID);
     }
 
     @FXML
-    public void redirectToPatientList(ActionEvent event, String id) throws IOException, SQLException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("doctor-list-of-patients-view.fxml"));
+    public void redirectToAppointmentView(ActionEvent event, String id) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("patient-appointment-view.fxml"));
         root = loader.load();
-
-        DoctorPatientsListController doctorPatientsListController = loader.getController();
-        doctorPatientsListController.setStaffID(id);
-        doctorPatientsListController.loadPatientList();
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -217,7 +213,7 @@ public class PatientProfileDetailController implements Initializable {
     }
 
     public void onBackClicked(ActionEvent event) throws IOException, SQLException {
-        redirectToPatientList(event, staffID);
+        redirectToAppointmentView(event, patientID);
     }
 
 }
