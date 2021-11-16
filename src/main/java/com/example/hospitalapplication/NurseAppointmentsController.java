@@ -98,7 +98,11 @@ public class NurseAppointmentsController implements Initializable
         nurseWlcm.setText(name);
     }
 
+<<<<<<< HEAD
     //get the doctors name for an appointment
+=======
+    //get the doctors name for an appointment by passing in the appointment id
+>>>>>>> 13779175fcaaa16a68aa7e6233b74f982cdcb47b
     public String getDoctorName(String aptID) throws SQLException {
         conn = connect();
         String sql1 = "";
@@ -178,6 +182,7 @@ public class NurseAppointmentsController implements Initializable
         c.add(Calendar.DATE, 1);  // number of days to add
         dt = sdf.format(c.getTime());
         aptDate.setText(dt);
+        loadAppointmentList();
     }
 
     //go to previous day
@@ -190,6 +195,7 @@ public class NurseAppointmentsController implements Initializable
         c.add(Calendar.DATE, -1);  // number of days to add
         dt = sdf.format(c.getTime());
         aptDate.setText(dt);
+        loadAppointmentList();
     }
 
     //appointment notes button clicked
@@ -221,4 +227,32 @@ public class NurseAppointmentsController implements Initializable
         redirectToMessages(event, staffID);
     }
 
+<<<<<<< HEAD
+=======
+    //go to new apt form
+    public void onNewApt(ActionEvent event) throws IOException, SQLException
+    {
+        System.out.println("New appointment selected");
+       // redirectToNewApt(event, staffID);
+    }
+/*
+    //got to new appointment form
+    public void redirectToNewApt(ActionEvent event, String id) throws IOException, SQLException
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("nurse-new-apt-view.fxml"));
+        root = loader.load();
+
+        NurseMessageListController nurseMessagesController = loader.getController();
+        nurseMessagesController.setStaffID(id);
+        nurseMessagesController.loadMessageList();
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        window.setScene(scene);
+        window.show();
+    }
+    */
+
+
+>>>>>>> 13779175fcaaa16a68aa7e6233b74f982cdcb47b
 }
