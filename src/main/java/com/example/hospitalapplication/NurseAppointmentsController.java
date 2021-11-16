@@ -98,11 +98,7 @@ public class NurseAppointmentsController implements Initializable
         nurseWlcm.setText(name);
     }
 
-<<<<<<< HEAD
-    //get the doctors name for an appointment
-=======
     //get the doctors name for an appointment by passing in the appointment id
->>>>>>> 13779175fcaaa16a68aa7e6233b74f982cdcb47b
     public String getDoctorName(String aptID) throws SQLException {
         conn = connect();
         String sql1 = "";
@@ -227,8 +223,6 @@ public class NurseAppointmentsController implements Initializable
         redirectToMessages(event, staffID);
     }
 
-<<<<<<< HEAD
-=======
     //go to new apt form
     public void onNewApt(ActionEvent event) throws IOException, SQLException
     {
@@ -252,7 +246,4 @@ public class NurseAppointmentsController implements Initializable
         window.show();
     }
     */
-
-
->>>>>>> 13779175fcaaa16a68aa7e6233b74f982cdcb47b
 }

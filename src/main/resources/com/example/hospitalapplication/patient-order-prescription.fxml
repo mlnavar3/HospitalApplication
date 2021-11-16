@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hospitalapplication.PatientOrderPrescrriptionController">
+   <children>
+      <Label layoutX="211.0" layoutY="110.0" text="Order Prescription">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TextField layoutX="226.0" layoutY="188.0" />
+      <Text layoutX="129.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medication">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <TextArea layoutX="178.0" layoutY="242.0" prefHeight="85.0" prefWidth="244.0" />
+      <Text layoutX="77.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Button layoutX="274.0" layoutY="348.0" mnemonicParsing="false" text="Send " />
+      <Button layoutX="51.0" layoutY="348.0" mnemonicParsing="false" onAction="#onBackClicked"  text="Back" />
+   </children>
+</AnchorPane>

@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
+//import vcjavafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -84,6 +85,11 @@ public class LoginController implements Initializable {
                 nurseController.loadAppointmentList();
                 break;
             case "Patient":
+                PatientAppointmentViewController patientController = loader.getController();
+                patientController.setPatientID(id);
+                patientController.setDate();
+                patientController.setName();
+                patientController.loadAppointmentList();
                 break;
 
         }
@@ -169,6 +175,7 @@ public class LoginController implements Initializable {
                         redirectPortal(event, "Patient", patientID);
                     }
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                     MessageAlert.incorrectUsernameOrPassword();
                 }
                 break;
