@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="814.0" prefWidth="363.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hospitalapplication.PatientProfileDetailController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="814.0" prefWidth="363.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hospitalapplication.DoctorPatientProfileDetailController">
    <children>
       <Label layoutX="24.0" layoutY="22.0" prefHeight="25.0" prefWidth="39.0" text="Name:" />
       <Label fx:id="nameLabel" layoutX="63.0" layoutY="22.0" prefHeight="25.0" prefWidth="292.0" />
