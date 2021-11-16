@@ -81,7 +81,7 @@ public class DoctorPatientsListController implements Initializable {
                     rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
         }
 
-        PatientProfileDetailController patientController = loader.getController();
+        DoctorPatientProfileDetailController patientController = loader.getController();
         patientController.setStaffID(staffID);
         patientController.setPatientID(patientId);
         patientController.loadPrescriptionList();

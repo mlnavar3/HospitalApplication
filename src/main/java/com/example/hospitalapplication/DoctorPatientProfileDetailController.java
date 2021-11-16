@@ -28,7 +28,7 @@ import java.util.*;
 
 import static com.example.hospitalapplication.Connect.connect;
 
-public class PatientProfileDetailController implements Initializable {
+public class DoctorPatientProfileDetailController implements Initializable {
     private Scene scene;
     private Parent root;
     Connection conn = null;

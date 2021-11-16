@@ -6,15 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DoctorPrescriptionController {
     String staffID = "";
@@ -126,7 +123,7 @@ public class DoctorPrescriptionController {
                     rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
         }
 
-        PatientProfileDetailController patientController = loader.getController();
+        DoctorPatientProfileDetailController patientController = loader.getController();
         patientController.setStaffID(staffID);
         patientController.setPatientID(patientID);
         patientController.loadPrescriptionList();
