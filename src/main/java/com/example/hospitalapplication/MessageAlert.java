@@ -141,4 +141,13 @@ public class MessageAlert {
 
         alert.showAndWait();
     }
+
+    public static void requestPrescription() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Sent");
+        alert.setHeaderText("Success");
+        alert.setContentText("Request sent to pharmacy.");
+
+        alert.showAndWait();
+    }
 }

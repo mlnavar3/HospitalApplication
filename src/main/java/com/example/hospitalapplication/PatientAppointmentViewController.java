@@ -18,7 +18,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
-import java.sql.Date;
+//import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -28,11 +29,11 @@ import static com.example.hospitalapplication.Connect.connect;
 import java.net.URL;
 
 public class PatientAppointmentViewController implements Initializable {
-    String patientID = "";
+    String patientID = "", patientName = "";
     Connection conn = null;
 
     @FXML
-    private TableView<Appointment> tableView = new TableView<>();
+    private TableView<Appointment> tableView;
     @FXML
     private TableColumn<Appointment, String> dateColumn;
     @FXML
@@ -81,6 +82,7 @@ public class PatientAppointmentViewController implements Initializable {
         }
 
         //update welcome label with patients name
+        patientName = name;
         welcomelbl.setText("Welcome, " + name);
     }
 
@@ -132,35 +134,30 @@ public class PatientAppointmentViewController implements Initializable {
     }
 
     public void loadAppointmentList() throws SQLException {
-        //get appointment info from sql database
-        conn = Connect.connect();
-        String sql = "";
-        PreparedStatement stmt = null;
-        //get patient info from sql database
-        sql = "SELECT * FROM \"Appointment \" WHERE patient_profile_id = ?";
-        stmt = conn.prepareStatement(sql);
-        stmt.setString(1, patientID);
-        ResultSet rs = stmt.executeQuery();
+        conn = connect();
+        String sql1 = "";
+        PreparedStatement stmt1 = null;
+        sql1 = "SELECT * FROM \"Appointment \" WHERE patient_profile_id=?";
+        stmt1 = conn.prepareStatement(sql1);
+        stmt1.setString(1, patientID);
+        ResultSet rs1 = stmt1.executeQuery();
 
-        //list of appointment objects
-        ArrayList<Appointment> appointmentList = new ArrayList<>();
-
-        while(rs.next()) {
-            appointmentList.add(new Appointment(rs.getString(8) + " " + rs.getString(9), rs.getDouble(1), rs.getDouble(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getString(7),rs.getString(10)));
-        };
+        List<Appointment> appointmentList = new ArrayList<>();
+        while(rs1.next()) {
+                int age = 0;
+                appointmentList.add(new Appointment(rs1.getString(1), rs1.getDate(2), rs1.getInt(3), rs1.getInt(4), rs1.getDouble(5), rs1.getString(6), rs1.getString(7), rs1.getString(8), rs1.getString(9), rs1.getString(10), age));
+        }
 
         ObservableList<Appointment> appointments = FXCollections.observableArrayList(appointmentList);
         tableView.setItems(appointments);
 
-        rs.close();
+        rs1.close();
         conn.close();
         setTableViewData();
-
     }
 
     public void setTableViewData() {
-        dateColumn.setCellValueFactory(appointment -> new ReadOnlyStringWrapper(appointment.getValue().getDate().toString()));
-        diagnosisColumn.setCellValueFactory(appointment -> new ReadOnlyStringWrapper(appointment.getValue().getDoctorSummary()));
+        diagnosisColumn.setCellValueFactory(name -> new ReadOnlyStringWrapper(name.getValue().getDoctorSummary()));
+        dateColumn.setCellValueFactory(Diagnosis -> new ReadOnlyStringWrapper(Diagnosis.getValue().getDate().toString()));
     }
-
 }

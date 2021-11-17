@@ -180,17 +180,33 @@ public class DoctorPatientProfileDetailController implements Initializable {
 
     @FXML
     public void redirectToOrderPrescription(ActionEvent event, String patientID) throws IOException, SQLException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("doctor-order-prescription.fxml"));
-        root = loader.load();
+        //check if doctor or patient
+        if (staffID != "") {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("doctor-order-prescription.fxml"));
+            root = loader.load();
 
-        DoctorPrescriptionController doctorPrescriptionController = loader.getController();
-        doctorPrescriptionController.setStaffID(staffID);
-        doctorPrescriptionController.setPatientID(patientID);
+            DoctorPrescriptionController doctorPrescriptionController = loader.getController();
+            doctorPrescriptionController.setStaffID(staffID);
+            doctorPrescriptionController.setPatientID(patientID);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        window.setScene(scene);
-        window.show();
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            window.setScene(scene);
+            window.show();
+        } else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("patient-order-prescription.fxml"));
+            root = loader.load();
+
+            PatientPrescriptionController patientPrescriptionController = loader.getController();
+            patientPrescriptionController.setPatientID(patientID);
+            patientPrescriptionController.loadPrescriptionList();
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            window.setScene(scene);
+            window.show();
+        }
+
     }
 
     public void onOrderPrescriptionClick(ActionEvent event) throws SQLException, IOException {
@@ -198,22 +214,39 @@ public class DoctorPatientProfileDetailController implements Initializable {
     }
 
     @FXML
-    public void redirectToAppointmentView(ActionEvent event, String id) throws IOException, SQLException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("doctor-list-of-patients-view.fxml"));
-        root = loader.load();
+    public void redirectToPreviousView(ActionEvent event, String id) throws IOException, SQLException {
+        if(staffID != "") {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("doctor-list-of-patients-view.fxml"));
+            root = loader.load();
 
-        DoctorPatientsListController doctorPatientsListController = loader.getController();
-        doctorPatientsListController.setStaffID(staffID);
-        doctorPatientsListController.loadPatientList();
+            DoctorPatientsListController doctorPatientsListController = loader.getController();
+            doctorPatientsListController.setStaffID(staffID);
+            doctorPatientsListController.loadPatientList();
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        window.setScene(scene);
-        window.show();
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            window.setScene(scene);
+            window.show();
+
+        } else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("patient-appointment-view.fxml"));
+            root = loader.load();
+
+            PatientAppointmentViewController patientController = loader.getController();
+            patientController.setPatientID(patientID);
+            patientController.setDate();
+            patientController.setName();
+            patientController.loadAppointmentList();
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            window.setScene(scene);
+            window.show();
+        }
     }
 
     public void onBackClicked(ActionEvent event) throws IOException, SQLException {
-        redirectToAppointmentView(event, staffID);
+        redirectToPreviousView(event, staffID);
     }
 
 }

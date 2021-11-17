@@ -22,10 +22,10 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TableView layoutX="134.0" layoutY="137.0" prefHeight="200.0" prefWidth="315.0">
+      <TableView fx:id="tableView" layoutX="71.0" layoutY="137.0" prefHeight="200.0" prefWidth="467.0">
         <columns>
           <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date" />
-          <TableColumn fx:id="diagnosisColumn" prefWidth="122.0" text="Diagnosis" />
+          <TableColumn fx:id="diagnosisColumn" prefWidth="391.0" text="Diagnosis" />
         </columns>
       </TableView>
    </children>
