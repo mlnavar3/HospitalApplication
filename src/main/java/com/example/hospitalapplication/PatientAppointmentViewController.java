@@ -188,8 +188,7 @@ public class PatientAppointmentViewController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("patient-messages-view.fxml"));
         root = loader.load();
 
-        //PatientViewMessageController patientViewMessageController = loader.getController();
-        //patientViewMessageController.setPatientID(patientID);
+        PatientMessageListController patientMessageListController = loader.getController();
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

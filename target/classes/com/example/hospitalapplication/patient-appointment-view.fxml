@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hospitalapplication.PatientAppointmentViewController">
    <children>
-      <Button layoutX="37.0" layoutY="51.0" mnemonicParsing="false" text="Messages" />
+      <Button layoutX="37.0" layoutY="51.0" mnemonicParsing="false" onAction="#onMessagesClicked" text="Messages" />
       <Button layoutX="517.0" layoutY="51.0" mnemonicParsing="false" onAction="#onProfileClicked" text="Profile" />
       <Text layoutX="235.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments">
          <font>

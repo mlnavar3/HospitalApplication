@@ -148,7 +148,16 @@ public class PatientPrescriptionController implements Initializable {
 
 
     public void onRequestClicked(ActionEvent event) throws IOException, SQLException {
-        MessageAlert.requestPrescription();
+        Prescription selectedPrescription = prescriptionTable.getSelectionModel().getSelectedItem();
+
+        if(selectedPrescription == null)
+        {
+            MessageAlert.viewMsgError();
+        }
+        else
+        {
+            MessageAlert.requestPrescription();
+        }
     }
 
 }

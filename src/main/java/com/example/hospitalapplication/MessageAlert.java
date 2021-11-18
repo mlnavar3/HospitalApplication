@@ -150,4 +150,32 @@ public class MessageAlert {
 
         alert.showAndWait();
     }
+
+    public static void appointmentCreated() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Created");
+        alert.setHeaderText("Success");
+        alert.setContentText("The appointment has been created.");
+
+        alert.showAndWait();
+    }
+
+    public static void appointmentCreatedFail() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Problem");
+        alert.setContentText("Please fill in the complaint text.");
+
+        alert.showAndWait();
+    }
+
+    public static void nullDate() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Problem");
+        alert.setContentText("Please ick a date.");
+
+        alert.showAndWait();
+    }
+
 }
