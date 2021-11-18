@@ -80,33 +80,44 @@ public class PatientMakeAppointmentController implements Initializable {
         String emptyString = "empty";
 
         //get additional appointment info
-        getAppointmentDate();
+        try {
+            getAppointmentDate();
+        } catch (NullPointerException e) {
+            System.out.println(e);
+            MessageAlert.nullDate();
+        }
         getCurrentDate();
         getAppointmentID();
         getComplaint();
 
-        String sql1 = "INSERT INTO [Appointment ] VALUES(?,?,?,?,?,?,?,?,?,?)";
-        try {
-            conn = connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql1);
-            pstmt.setString(1, appointmentID);
-            pstmt.setDate(2, currentDate);
-            pstmt.setDate(3, appointmentDate);
-            pstmt.setInt(4, intZero);//weight
-            pstmt.setInt(5, intZero);//height
-            pstmt.setDouble(6, doubleZero);//bodyTemp
-            pstmt.setString(7, emptyString);//bloodPressure
-            pstmt.setString(8, complaint);
-            pstmt.setString(9, emptyString);//doctorSummary
-            pstmt.setString(10, patientID);
-            pstmt.executeUpdate();
-            MessageAlert.prescriptionSuccessfulBox();
-            pstmt.close();
-        } catch (SQLException e) {
-            System.out.println(e);
+        String sql1 = "INSERT INTO [Appointment ] VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+
+        if(complaint == null || complaint.isEmpty()) {
+            MessageAlert.appointmentCreatedFail();
+        }else {
+            try {
+                conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql1);
+                pstmt.setString(1, appointmentID);
+                pstmt.setDate(2, currentDate);
+                pstmt.setDate(3, appointmentDate);
+                pstmt.setInt(4, intZero);//weight
+                pstmt.setInt(5, intZero);//height
+                pstmt.setDouble(6, doubleZero);//bodyTemp
+                pstmt.setString(7, emptyString);//bloodPressure
+                pstmt.setString(8, complaint);
+                pstmt.setString(9, emptyString);//doctorSummary
+                pstmt.setString(10, patientID);
+                pstmt.setString(11, null);
+                pstmt.executeUpdate();
+                MessageAlert.appointmentCreated();
+                pstmt.close();
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
         }
+
         conn.close();
-        System.out.println(patientID);
     }
 
     @FXML
