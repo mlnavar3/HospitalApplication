@@ -62,13 +62,13 @@ public class PatientCreateMessageController implements Initializable
             comboboxData.add(new Patient(rs.getString(1), rs.getString(2), rs.getString(3)));
         }
 
-        ObservableList<Patient> patients = FXCollections.observableArrayList(comboboxData);
-        recipientList.itemsProperty().setValue(patients);
-
-        recipientList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Patient Name: " + newValue.getFirstName() + " " + newValue.getLastName());
-            System.out.println("Patient Id: " + newValue.getId());
-        });
+//        ObservableList<Patient> patients = FXCollections.observableArrayList(comboboxData);
+//        recipientList.itemsProperty().setValue(patients);
+//
+//        recipientList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+//            System.out.println("Patient Name: " + newValue.getFirstName() + " " + newValue.getLastName());
+//            System.out.println("Patient Id: " + newValue.getId());
+//        });
     }
 
     //user has selected the recipient

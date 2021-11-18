@@ -173,7 +173,7 @@ public class MessageAlert {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Problem");
-        alert.setContentText("Please ick a date.");
+        alert.setContentText("Please pick a date.");
 
         alert.showAndWait();
     }
