@@ -90,6 +90,7 @@ public class LoginController implements Initializable {
                 patientController.setDate();
                 patientController.setName();
                 patientController.loadAppointmentList();
+                conn.close();
                 break;
 
         }

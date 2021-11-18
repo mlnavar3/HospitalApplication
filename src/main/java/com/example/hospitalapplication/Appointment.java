@@ -68,6 +68,12 @@ public class Appointment {
         return date;
     }
 
+    public String getDateString() {
+        String dt = date.toString();
+
+        return dt;
+    }
+
     public void setDate(Date date) {
         this.date = date;
     }
