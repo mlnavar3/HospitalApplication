@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="686.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hospitalapplication.PatientContactChangeController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <Label alignment="CENTER" layoutX="170.0" layoutY="26.0" prefHeight="35.0" prefWidth="256.0" text="Pediatric Office">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
+    <Button layoutX="222.0" layoutY="552.0" onAction="#ChangePatientInfo" prefHeight="46.0" prefWidth="150.0" text="Confirm" />
+    <TextField fx:id="firstNameField" layoutX="158.0" layoutY="205.0" prefHeight="28.0" prefWidth="139.0" />
+    <TextField fx:id="lastNameField" layoutX="299.0" layoutY="205.0" prefHeight="28.0" prefWidth="141.0" />
+    <DatePicker fx:id="myDatePicker" layoutX="158.0" layoutY="256.0" prefHeight="25.0" prefWidth="282.0" />
+    <TextField fx:id="phoneNumberField" layoutX="158.0" layoutY="304.0" prefHeight="28.0" prefWidth="282.0" />
+    <TextField fx:id="emailField" layoutX="159.0" layoutY="355.0" prefHeight="28.0" prefWidth="282.0" />
+    <TextField fx:id="insuranceNameField" layoutX="160.0" layoutY="407.0" prefHeight="28.0" prefWidth="282.0" />
+    <TextField fx:id="pharmacyField" layoutX="159.0" layoutY="460.0" prefHeight="28.0" prefWidth="282.0" />
+    <Label layoutX="159.0" layoutY="188.0" text="First Name*" />
+    <Label layoutX="300.0" layoutY="188.0" text="Last Name*" />
+    <Label layoutX="158.0" layoutY="239.0" text="Date of Birth*" />
+    <Label layoutX="159.0" layoutY="287.0" text="Phone Number*" />
+    <Label layoutX="160.0" layoutY="338.0" text="Email Address*" />
+    <Line endX="240.0" layoutX="292.0" layoutY="525.0" startX="-227.0" stroke="#aeaeae" strokeWidth="0.5" />
+    <Line endX="240.0" layoutX="295.0" layoutY="162.0" startX="-227.0" stroke="#aeaeae" strokeWidth="0.5" />
+    <Label layoutX="161.0" layoutY="390.0" text="Insurance*" />
+    <Label layoutX="160.0" layoutY="443.0" text="Pharmacy*" />
+    <Label alignment="CENTER" layoutX="119.0" layoutY="85.0" prefHeight="35.0" prefWidth="362.0" text="Manage Contact Information">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Label>
+</AnchorPane>

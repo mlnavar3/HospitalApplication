@@ -182,4 +182,24 @@ public class PatientAppointmentViewController implements Initializable {
     public void onMakeAppointmentClicked(ActionEvent event) throws IOException, SQLException {
         redirectToPatientCreateAppointment(event, patientID);
     }
+
+    @FXML
+    public void redirectToMessages(ActionEvent event, String id) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("patient-messages-view.fxml"));
+        root = loader.load();
+
+        //PatientViewMessageController patientViewMessageController = loader.getController();
+        //patientViewMessageController.setPatientID(patientID);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        window.setScene(scene);
+        window.show();
+    }
+
+    @FXML
+    public void onMessagesClicked(ActionEvent event) throws IOException, SQLException {
+        redirectToMessages(event, patientID);
+    }
+
 }
