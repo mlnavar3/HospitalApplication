@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hospitalapplication.PatientAppointmentViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hospitalapplication.PatientAppointmentViewController">
    <children>
-      <Button layoutX="37.0" layoutY="51.0" mnemonicParsing="false" onAction="#onMessagesClicked" text="Messages" />
+      <Button layoutX="37.0" layoutY="51.0" mnemonicParsing="false" text="Messages" />
       <Button layoutX="517.0" layoutY="51.0" mnemonicParsing="false" onAction="#onProfileClicked" text="Profile" />
       <Text layoutX="235.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Button layoutX="241.0" layoutY="361.0" mnemonicParsing="false" text="Make Appointment" />
+      <Button layoutX="241.0" layoutY="361.0" mnemonicParsing="false" onAction="#onMakeAppointmentClicked" text="Make Appointment" />
       <Label fx:id="welcomelbl" layoutX="206.0" layoutY="53.0" text="Welcome, ">
          <font>
             <Font size="15.0" />
@@ -26,7 +25,7 @@
       <TableView fx:id="tableView" layoutX="71.0" layoutY="137.0" prefHeight="200.0" prefWidth="467.0">
         <columns>
           <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date" />
-          <TableColumn fx:id="diagnosisColumn" prefWidth="391.0" text="Diagnosis" />
+          <TableColumn fx:id="diagnosisColumn" prefWidth="391.0" text="Complaint" />
         </columns>
       </TableView>
    </children>

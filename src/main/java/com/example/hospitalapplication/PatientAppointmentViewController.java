@@ -84,6 +84,8 @@ public class PatientAppointmentViewController implements Initializable {
         //update welcome label with patients name
         patientName = name;
         welcomelbl.setText("Welcome, " + name);
+
+        conn.close();
     }
 
 
@@ -145,7 +147,8 @@ public class PatientAppointmentViewController implements Initializable {
         List<Appointment> appointmentList = new ArrayList<>();
         while(rs1.next()) {
                 int age = 0;
-                appointmentList.add(new Appointment(rs1.getString(1), rs1.getDate(2), rs1.getInt(3), rs1.getInt(4), rs1.getDouble(5), rs1.getString(6), rs1.getString(7), rs1.getString(8), rs1.getString(9), rs1.getString(10), age));
+                String tempName= "temp name";
+                appointmentList.add(new Appointment(rs1.getString(1), rs1.getDate(3), rs1.getInt(4), rs1.getInt(5), rs1.getDouble(6), rs1.getString(7), rs1.getString(8), rs1.getString(9), tempName, rs1.getString(10), age));
         }
 
         ObservableList<Appointment> appointments = FXCollections.observableArrayList(appointmentList);
@@ -157,8 +160,27 @@ public class PatientAppointmentViewController implements Initializable {
     }
 
     public void setTableViewData() {
-        diagnosisColumn.setCellValueFactory(name -> new ReadOnlyStringWrapper(name.getValue().getDoctorSummary()));
-        dateColumn.setCellValueFactory(Diagnosis -> new ReadOnlyStringWrapper(Diagnosis.getValue().getDate().toString()));
+        diagnosisColumn.setCellValueFactory(name -> new ReadOnlyStringWrapper(name.getValue().getMedicalComplaint()));
+        //dateColumn.setCellValueFactory(Diagnosis -> new ReadOnlyStringWrapper(Diagnosis.getValue().getDate().toString()));
+        dateColumn.setCellValueFactory(Diagnosis -> new ReadOnlyStringWrapper(Diagnosis.getValue().getDateString()));
+    }
+
+    @FXML
+    public void redirectToPatientCreateAppointment(ActionEvent event, String id) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("patient-create-appointment.fxml"));
+        root = loader.load();
+
+        PatientMakeAppointmentController patientMakeAppointmentController = loader.getController();
+        patientMakeAppointmentController.setPatientID(patientID);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        window.setScene(scene);
+        window.show();
+    }
+
+    public void onMakeAppointmentClicked(ActionEvent event) throws IOException, SQLException {
+        redirectToPatientCreateAppointment(event, patientID);
     }
 
     @FXML

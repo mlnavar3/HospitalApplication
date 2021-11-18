@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="468.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hospitalapplication.PatientMakeAppointmentController">
+   <children>
+      <Label layoutX="187.0" layoutY="106.0" text="Make Appointment">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Button layoutX="71.0" layoutY="424.0" mnemonicParsing="false" onAction="#onBackClicked" text="Back" />
+      <Button layoutX="234.0" layoutY="424.0" mnemonicParsing="false" onAction="#onMakeAppointmentClicked" text="Make Appointment" />
+      <TextArea fx:id="textArea" layoutX="194.0" layoutY="271.0" prefHeight="107.0" prefWidth="200.0" />
+      <DatePicker fx:id="myDatePicker" layoutX="206.0" layoutY="201.0" />
+      <Label layoutX="123.0" layoutY="201.0" prefHeight="25.0" prefWidth="50.0" text="Pick Date" />
+      <Label layoutX="106.0" layoutY="277.0" text="Complaint" />
+   </children>
+</AnchorPane>
